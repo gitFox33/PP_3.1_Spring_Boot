@@ -1,46 +1,49 @@
-package SpringBoot.models;
+package ru.rayanov.myapp.models;
 
-
-
-//import jakarta.persistence.*;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.*;
 
 import java.util.Objects;
 
 @Entity
 @Table(name = "users")
 public class User {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @Column
+    private Long id;
 
-    @Column(name = "name")
+    @NotEmpty
+    @Size(min = 2, max = 30, message = "Name should be between 2 and 30 characters")
+    @Column
     private String name;
 
-    @Column(name = "lastName")
-    private String lastName;
-
-
-    @Column(name = "age")
+    @NotEmpty
+    @Email(message = "Email should be valid")
+    @Column
+    private String email;
+    @NotNull
+    @Min(value = 1, message = "Age should be greater than 1")
+    @Column
     private Integer age;
 
     public User() {
     }
 
-    public User(long id, String name, String lastName, Integer age) {
+    public User(Long id, String name, String email, Integer age) {
         this.id = id;
         this.name = name;
-        this.lastName = lastName;
+        this.email = email;
         this.age = age;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -52,12 +55,14 @@ public class User {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+
+
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getAge() {

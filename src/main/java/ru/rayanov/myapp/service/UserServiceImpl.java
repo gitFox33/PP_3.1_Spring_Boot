@@ -1,9 +1,9 @@
-package SpringBoot.service;
+package ru.rayanov.myapp.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import SpringBoot.dao.UserDao;
-import SpringBoot.models.User;
+import ru.rayanov.myapp.dao.UserDao;
+import ru.rayanov.myapp.models.User;
 
 import java.util.List;
 

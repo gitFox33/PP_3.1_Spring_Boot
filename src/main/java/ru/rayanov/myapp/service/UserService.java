@@ -1,10 +1,10 @@
-package SpringBoot.dao;
+package ru.rayanov.myapp.service;
 
-import SpringBoot.models.User;
+import ru.rayanov.myapp.models.User;
 
 import java.util.List;
 
-public interface UserDao {
+public interface UserService {
     List<User> getAllUsers();
 
     void createUser(User user);
@@ -14,5 +14,4 @@ public interface UserDao {
     void editUser(Long id, User user);
 
     void deleteUser(Long id);
-
 }

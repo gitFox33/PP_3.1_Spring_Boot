@@ -5,20 +5,30 @@
     <title>All users</title>
 </head>
 <body>
+<h1>Список пользователей</h1>
+<!--Создаем таблицу-->
+<table>
+<!--Создаем шапку таблицы-->
+    <tr>
+        <th>Id</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>email</th>
+    </tr>
+<!--Вносим данные объекта в таблицу-->
+    <tr th:each="user : ${users}">
 
-
-
-<dif th:each="user : ${users}">
-
-    <a th:href="@{/{id}(id=${user.getId()})}"
-       th:text="${user.getName()} + ' ' + ${user.getLastName()} ">user</a>
-
-</dif>
-
+        <td th:text="${user.id}"></td>
+        <td th:text="${user.name}"></td>
+        <td th:text="${user.age}"></td>
+        <td th:text="${user.email}"></td>
+        <th><a th:href="@{/{id}/edit(id=${user.getId()})}">Edit</a></th>
+        <td><a th:href="@{/delete/{id}(id=${user.getId()})}">Delete</a></td>
+    </tr>
+</table>
 <br/>
 <hr/>
-
-<a href="/new">Create new user</a>
-
+<!--кнопка для создания нового пользователя-->
+<input type="button" value="Create new user" onclick="location.href='/new'">
 </body>
 </html>

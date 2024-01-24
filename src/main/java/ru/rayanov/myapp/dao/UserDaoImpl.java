@@ -1,9 +1,9 @@
-package SpringBoot.dao;
+package ru.rayanov.myapp.dao;
 
-import SpringBoot.models.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
+import ru.rayanov.myapp.models.User;
 
 import java.util.List;
 
@@ -12,7 +12,6 @@ import java.util.List;
 public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager em;
-
 
 
     @Override
@@ -37,7 +36,7 @@ public class UserDaoImpl implements UserDao {
     public void editUser(Long id, User user) {
         User userToBeEdit = getUserById(id);
         userToBeEdit.setName(user.getName());
-        userToBeEdit.setLastName(user.getLastName());
+        userToBeEdit.setEmail(user.getEmail());
         userToBeEdit.setAge(user.getAge());
         em.merge(userToBeEdit);
     }
@@ -45,8 +44,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public void deleteUser(Long id) {
         em.remove(getUserById(id));
+
     }
-
-
 
 }
