@@ -15,13 +15,18 @@ import ru.rayanov.myapp.service.UserService;
 @Controller
 public class UserController {
     private final UserService userService;
+    private String index = "redirect:/index";
 
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-
     @GetMapping("/")
+    public String helloPage(Model model) {
+        return "hello";
+    }
+
+    @GetMapping("/index")
     public String indexPage(Model model) {
 
         model.addAttribute("users", userService.getAllUsers());
@@ -40,7 +45,7 @@ public class UserController {
             return "new";
         }
         userService.createUser(user);
-        return "redirect:/";
+        return index;
     }
 
     @GetMapping("/{id}/edit")
@@ -51,20 +56,20 @@ public class UserController {
 
 
     @PostMapping("/{id}")
-    public String updateUser(@ModelAttribute("user") @Valid User user,BindingResult bindingResult,
-                         @PathVariable("id") Long id) {
+    public String updateUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult,
+                             @PathVariable("id") Long id) {
         if (bindingResult.hasErrors()) {
             return "edit";
         }
         userService.editUser(id, user);
-        return "redirect:/";
+        return index;
     }
 
 
     @GetMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id) {
         userService.deleteUser(id);
-        return "redirect:/";
+        return index;
     }
 }
 
